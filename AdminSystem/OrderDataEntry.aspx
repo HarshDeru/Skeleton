@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    This is the order entry page
+    This is the order entry page.
     <form id="form1" runat="server">
         <div>
         </div>
