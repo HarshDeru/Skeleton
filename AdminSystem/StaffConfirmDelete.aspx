@@ -7,6 +7,7 @@
     <title></title>
 </head>
 <body>
+    This page is the page for staff cofirm delete.
     <form id="form1" runat="server">
         <div>
         </div>
