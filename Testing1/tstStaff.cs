@@ -39,7 +39,7 @@ namespace Testing1
         public void Staff_GenderPropertyOK()
         {
             clsStaff Staff = new clsStaff();
-            String TestData = "M";
+            Boolean TestData = true;
             Staff.Staff_Gender = TestData;
             Assert.AreEqual(Staff.Staff_Gender, TestData);
         }
