@@ -25,10 +25,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         AStaff.Staff_Role = txtStaffRole.Text;
         AStaff.Staff_HireDate = Convert.ToDateTime(txtStaffHireDate.Text);
         AStaff.Staff_Salary = Convert.ToInt32(txtStaffSalary.Text);
-        AStaff.Staff_Gender = Convert.ToBoolean(chkStaffGenderFemale.Checked);
-        AStaff.Staff_Gender = Convert.ToBoolean(chkStaffGenderMale.Checked);
-        
-
+        AStaff.Staff_Gender = Convert.ToBoolean(dblGender.SelectedIndex);
         //store the staff in the session object
         Session["AStaff"] = AStaff;
         //redirects to staff viewer page.
@@ -36,12 +33,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
-    protected void chkStaffGenderMale_CheckedChanged(object sender, EventArgs e)
-    {
+  
 
-    }
 
-    protected void chkStaffGenderFemale_CheckedChanged(object sender, EventArgs e)
+
+    protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
