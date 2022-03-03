@@ -50,7 +50,7 @@ namespace Testing3
         public void CustomerGenderPropertyOk()
         {
             clsCustomer ACustomer = new clsCustomer();
-            String TestData = "Male";
+            bool TestData = true;
             ACustomer.CustomerGender = TestData;
             Assert.AreEqual(ACustomer.CustomerGender, TestData);
         }
