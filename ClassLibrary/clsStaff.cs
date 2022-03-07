@@ -6,8 +6,8 @@ namespace ClassLibrary
     {
 
         private int mStaffID;
-        public int StaffID 
-        { 
+        public int StaffID
+        {
             get
             {
                 //this line of code sends data out of the property
@@ -107,15 +107,32 @@ namespace ClassLibrary
 
         public bool Find(int staffID)
         {
-            //set the private data members to the test data value
-            mStaffID = 1;
-            mStaff_FullName = "Shilpesh Jentilal";
-            mStaff_Gender = true ;
-            mStaff_HireDate = Convert.ToDateTime("13/03/2020");
-            mStaff_Role = "Admin";
-            mStaff_Salary= 18000 ; 
-            //always return true
-            return true;
+            //create an instance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the staff id to search for 
+            DB.AddParameter("@StaffID", StaffID);
+            //execute the store procedure
+            DB.Execute("sproc_tblStaff_FilterByStaffID");
+            //if one record is found (There should be either one or zero)
+            if (DB.Count == 1)
+            {
+                mStaffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
+                mStaff_FullName = Convert.ToString(DB.DataTable.Rows[0]["FullName"]);
+                mStaff_Gender = Convert.ToBoolean(DB.DataTable.Rows[0]["Gender"]);
+                mStaff_HireDate = Convert.ToDateTime(DB.DataTable.Rows[0]["HireDate"]);
+                mStaff_Role = Convert.ToString(DB.DataTable.Rows[0]["Role"]);
+                mStaff_Salary = Convert.ToDouble(DB.DataTable.Rows[0]["Salary"]);
+                //returns true as everthing wokrs ok
+                return true;
+            }
+            else
+            {
+
+                //returns false indicating a problem
+                return false;
+            }
         }
+
+
     }
 }
