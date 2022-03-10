@@ -4,6 +4,7 @@ namespace ClassLibrary
 {
     public class clsStock
     {
+
         public bool Active { get; set; }
         public int ProductID { get; set; }
         public double Product_Price { get; set; }
