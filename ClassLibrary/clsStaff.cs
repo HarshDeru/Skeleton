@@ -6,8 +6,8 @@ namespace ClassLibrary
     {
 
         private int mStaffID;
-        public int StaffID 
-        { 
+        public int StaffID
+        {
             get
             {
                 //this line of code sends data out of the property
@@ -105,17 +105,29 @@ namespace ClassLibrary
 
         }
 
-        public bool Find(int staffID)
+        public bool Find(int StaffID)
         {
-            //set the private data members to the test data value
-            mStaffID = 1;
-            mStaff_FullName = "Shilpesh Jentilal";
-            mStaff_Gender = true ;
-            mStaff_HireDate = Convert.ToDateTime("13/03/2020");
-            mStaff_Role = "Admin";
-            mStaff_Salary= 18000 ; 
-            //always return true
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@StaffID", StaffID);
+            DB.Execute("sproc_tblStaff_FilterByStaffID");
+            if (DB.Count == 1)
+            {
+                //set the private data members to the test data value
+                mStaffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
+                mStaff_FullName = Convert.ToString(DB.DataTable.Rows[0]["Staff_FullName"]);
+                mStaff_Gender = Convert.ToBoolean(DB.DataTable.Rows[0]["Staff_Gender"]);
+                mStaff_Role = Convert.ToString(DB.DataTable.Rows[0]["Staff_Role"]);
+                mStaff_HireDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Staff_HireDate"]);
+                mStaff_Salary = Convert.ToDouble(DB.DataTable.Rows[0]["Staff_Salary"]);
+                //always return true
+                return true;
+            }
+            else
+            {
+                return false;
+
+
+            }
         }
     }
 }
