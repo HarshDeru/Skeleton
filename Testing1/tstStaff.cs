@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace Testing1
+namespace Test_Framework
 {
     [TestClass]
     public class tstStaff
@@ -82,7 +82,7 @@ namespace Testing1
             //boolean variable to store the result of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //test to see if the result is true
@@ -90,7 +90,7 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void FindStaffIDFound()
+        public void TestStaffIDFound()
         {
             //create an instance of staff class
             clsStaff Staff = new clsStaff();
@@ -99,7 +99,7 @@ namespace Testing1
             //bolean variable to record if data is OK(assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff id
@@ -113,7 +113,7 @@ namespace Testing1
 
 
         [TestMethod]
-        public void FindStaffFullNameFound()
+        public void TestStaffFullNameFound()
         {
             //create an instance of staff class
             clsStaff Staff = new clsStaff();
@@ -122,11 +122,11 @@ namespace Testing1
             //bolean variable to record if data is OK(assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff fullname
-            if (Staff.Staff_FullName != "Shilpesh Jentilal")
+            if (Staff.Staff_FullName != "Shilpesh Jentilal   ")
             {
                 OK = false;
             }
@@ -136,7 +136,7 @@ namespace Testing1
 
 
         [TestMethod]
-        public void FindStaffGenderFound()
+        public void TestStaffGenderFound()
         {
             //create an instance of staff class
             clsStaff Staff = new clsStaff();
@@ -145,7 +145,7 @@ namespace Testing1
             //bolean variable to record if data is OK(assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff gender
@@ -158,7 +158,7 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void FindStaffHireDateFound()
+        public void TestStaffHireDateFound()
         {
             //create an instance of staff class
             clsStaff Staff = new clsStaff();
@@ -167,7 +167,7 @@ namespace Testing1
             //bolean variable to record if data is OK(assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff hiredate
@@ -182,7 +182,7 @@ namespace Testing1
 
 
         [TestMethod]
-        public void FindStaffRoleFound()
+        public void TestStaffRoleFound()
         {
             //create an instance of staff class
             clsStaff Staff = new clsStaff();
@@ -191,7 +191,7 @@ namespace Testing1
             //bolean variable to record if data is OK(assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff role
@@ -205,7 +205,7 @@ namespace Testing1
 
 
         [TestMethod]
-        public void FindStaffSalaryFound()
+        public void TestStaffSalaryFound()
         {
             //create an instance of staff class
             clsStaff Staff = new clsStaff();
@@ -214,13 +214,14 @@ namespace Testing1
             //bolean variable to record if data is OK(assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int StaffID = 1;
+            Int32 StaffID = 1;
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff salary
-            if (Staff.Staff_Salary != 18000)
+            if (Staff.Staff_Salary != 18000.0000)
             {
                 OK = false;
+                
             }
             //test to see if the result is true
             Assert.IsTrue(OK);

@@ -125,7 +125,7 @@ public class clsDataConnection
     private string TrimPath(string OldPath)
     {
         Int32 Posn = 0;
-        //find the right most instance of 
+        //find the right most instance of \\
         Posn = OldPath.LastIndexOf("\\");
         if (Posn != -1)
         {

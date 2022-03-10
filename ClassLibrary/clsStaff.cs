@@ -105,34 +105,29 @@ namespace ClassLibrary
 
         }
 
-        public bool Find(int staffID)
+        public bool Find(int StaffID)
         {
-            //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
-            //add the parameter for the staff id to search for 
             DB.AddParameter("@StaffID", StaffID);
-            //execute the store procedure
             DB.Execute("sproc_tblStaff_FilterByStaffID");
-            //if one record is found (There should be either one or zero)
             if (DB.Count == 1)
             {
+                //set the private data members to the test data value
                 mStaffID = Convert.ToInt32(DB.DataTable.Rows[0]["StaffID"]);
-                mStaff_FullName = Convert.ToString(DB.DataTable.Rows[0]["FullName"]);
-                mStaff_Gender = Convert.ToBoolean(DB.DataTable.Rows[0]["Gender"]);
-                mStaff_HireDate = Convert.ToDateTime(DB.DataTable.Rows[0]["HireDate"]);
-                mStaff_Role = Convert.ToString(DB.DataTable.Rows[0]["Role"]);
-                mStaff_Salary = Convert.ToDouble(DB.DataTable.Rows[0]["Salary"]);
-                //returns true as everthing wokrs ok
+                mStaff_FullName = Convert.ToString(DB.DataTable.Rows[0]["Staff_FullName"]);
+                mStaff_Gender = Convert.ToBoolean(DB.DataTable.Rows[0]["Staff_Gender"]);
+                mStaff_Role = Convert.ToString(DB.DataTable.Rows[0]["Staff_Role"]);
+                mStaff_HireDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Staff_HireDate"]);
+                mStaff_Salary = Convert.ToDouble(DB.DataTable.Rows[0]["Staff_Salary"]);
+                //always return true
                 return true;
             }
             else
             {
-
-                //returns false indicating a problem
                 return false;
+
+
             }
         }
-
-
     }
 }
