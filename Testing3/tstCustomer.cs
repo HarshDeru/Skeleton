@@ -17,7 +17,7 @@ namespace Testing3
             Assert.IsNotNull(ACustomer);
         }
 
-
+        //Testing Customer ID Property
         [TestMethod]
         public void CustomerIdPropertyOk()
         {
@@ -28,15 +28,17 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerId, TestData);
         }
 
+        //Testing the customer full name
         [TestMethod]
         public void CustomerFullNamePropertyOK()
         {
             clsCustomer ACustomer = new clsCustomer();
-            String TestData = "Shila Javani";
+            String TestData = "Ujwal Dharmesh";
             ACustomer.CustomerFullName = TestData;
             Assert.AreEqual(ACustomer.CustomerFullName, TestData);
         }
 
+        //Testing the customer date of birth property
         [TestMethod]
         public void CustomerDateOfBirthPropertyOk()
         {
@@ -46,6 +48,7 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerDateOfBirth, TestData);
         }
 
+        //Testing the customer gender property
         [TestMethod]
         public void CustomerGenderPropertyOk()
         {
@@ -55,31 +58,34 @@ namespace Testing3
             Assert.AreEqual(ACustomer.CustomerGender, TestData);
         }
 
+        //Testing the customer address property
         [TestMethod]
         public void CustomerAddressPropertyOk()
         {
             clsCustomer ACustomer = new clsCustomer();
-            String TestData = "54 Uppercut Lane";
+            String TestData = "148 New House Road";
             ACustomer.CustomerAddress = TestData;
             Assert.AreEqual(ACustomer.CustomerAddress, TestData);
 
         }
 
+        //Testing the customer number property
         [TestMethod]
         public void CustomerNumberPropertyOk()
         {
             clsCustomer ACustomer = new clsCustomer();
-            Int64 TestData = 07549466467;
+            Int64 TestData = 7438028474;
             ACustomer.CustomerNumber = TestData;
             Assert.AreEqual(ACustomer.CustomerNumber, TestData);
 
         }
 
+        //Testing the customer email property
         [TestMethod]
         public void CustomerEmailPropertyOk()
         {
             clsCustomer ACustomer = new clsCustomer();
-            String TestData = "ShilpeshJentilal@yahoo.com";
+            String TestData = "ujwal710@gmail,com";
             ACustomer.CustomerEmail = TestData;
             Assert.AreEqual(ACustomer.CustomerEmail, TestData);
         }
@@ -131,11 +137,11 @@ namespace Testing3
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CustomerId = 1;
+            Int32 CustomerFullName = 1;
             //invoke the method
-            Found = ACustomer.Find(CustomerId);
+            Found = ACustomer.Find(CustomerFullName);
             //check if the CustomerId
-            if (ACustomer.CustomerFullName != "Test CustomerFullName")
+            if (ACustomer.CustomerFullName != "Ujwal Dharmesh")
             {
                 OK = false;
             }
@@ -201,7 +207,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerAddress != "Test CustomerAddress")
+            if (ACustomer.CustomerAddress != "148 New House Road")
             {
                 OK = false;
             }
@@ -223,7 +229,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerNumber != 00000000000)
+            if (ACustomer.CustomerNumber != 7438028474)
             {
                 OK = false;
             }
@@ -245,7 +251,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerEmail != "Test CustomerEmail")
+            if (ACustomer.CustomerEmail != "ujwal710@gmail.com")
             {
                 OK = false;
             }

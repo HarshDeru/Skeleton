@@ -7,7 +7,7 @@ namespace ClassLibrary
         //private data member for the customer Id property
         private Int32 mCustomerId;
         //CustomerId public property
-        public int CustomerId
+        public Int32 CustomerId
         { get
             {
                 //this line of code sends data out of the property
@@ -21,7 +21,7 @@ namespace ClassLibrary
         }
 
         //private data member for the customer FullName property
-        private String mCustomerFullName;
+        private string mCustomerFullName;
         //CustomerFullName public property
         public string CustomerFullName 
         { get
@@ -53,9 +53,9 @@ namespace ClassLibrary
         }
 
         //private data member for the customer Gender property
-        private bool mCustomerGender;
+        private Boolean mCustomerGender;
         //CustomerFullName public property
-        public bool CustomerGender
+        public Boolean CustomerGender
         { get
             {
                 //this line of code sends data out of the property
@@ -69,7 +69,7 @@ namespace ClassLibrary
         }
 
         //private data member for the customer Address property
-        private String mCustomerAddress;
+        private string mCustomerAddress;
         //CustomerFullName public property
         public string CustomerAddress
         { get
@@ -85,9 +85,9 @@ namespace ClassLibrary
         }
 
         //private data member for the customer Number property
-        private long mCustomerNumber;
+        private Int64 mCustomerNumber;
         //CustomerFullName public property
-        public long CustomerNumber
+        public Int64 CustomerNumber
         { get
             {
                 //this line of code sends data out of the property
@@ -101,7 +101,7 @@ namespace ClassLibrary
         }
 
         //private data member for the customer Email property
-        private String mCustomerEmail;
+        private string mCustomerEmail;
         //CustomerFullName public property
         public string CustomerEmail
         { get
@@ -118,16 +118,32 @@ namespace ClassLibrary
 
         public bool Find(int CustomerId)
         {
-            //set the private data members to the test data value
-            mCustomerId = 1;
-            mCustomerFullName = "Test CustomerFullName";
-            mCustomerDateOfBirth = Convert.ToDateTime("07/10.2001");
-            mCustomerGender = true;
-            mCustomerAddress = "Test CustomerAddress";
-            mCustomerNumber = 00000000000;
-            mCustomerEmail = "Test CustomerEmail";
-            //always return true
-            return true;
+            //create an istance of the data connection
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the address no to search for
+            DB.AddParameter("@CustomerId", CustomerId);
+            DB.Execute("sproc_tblCustomer_FilterByCustomerId");
+            //if one record is found (there should be either one or zero!)
+            if (DB.Count == 1)
+            {
+
+                //copy the data from the database to the private data numbers
+                mCustomerId = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerId"]);
+                mCustomerFullName = Convert.ToString(DB.DataTable.Rows[0]["CustomerFullName"]);
+                mCustomerDateOfBirth = Convert.ToDateTime(DB.DataTable.Rows[0]["CustomerDateOfBirth"]);
+                mCustomerGender = Convert.ToBoolean(DB.DataTable.Rows[0]["CustomerGender"]);
+                mCustomerAddress = Convert.ToString(DB.DataTable.Rows[0]["CustomerAddress"]);
+                mCustomerNumber = Convert.ToInt64(DB.DataTable.Rows[0]["CustomerNumber"]);
+                mCustomerEmail = Convert.ToString(DB.DataTable.Rows[0]["CustomerEmail"]);
+                return true;
+             
+            } 
+            //if no record was found
+            else
+            {
+                //return false indicating a problem
+                return false;
+            }
         }
     }
 }
