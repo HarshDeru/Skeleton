@@ -135,7 +135,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerFullName != "Test CustomerFullName")
+            if (ACustomer.CustomerFullName != "Ujwal Dharmesh")
             {
                 OK = false;
             }
@@ -201,7 +201,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerAddress != "Test CustomerAddress")
+            if (ACustomer.CustomerAddress != "148 New House Road")
             {
                 OK = false;
             }
@@ -223,7 +223,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerNumber != 00000000000)
+            if (ACustomer.CustomerNumber != 7438028474)
             {
                 OK = false;
             }
@@ -245,7 +245,7 @@ namespace Testing3
             //invoke the method
             Found = ACustomer.Find(CustomerId);
             //check if the CustomerId
-            if (ACustomer.CustomerEmail != "Test CustomerEmail")
+            if (ACustomer.CustomerEmail != "ujwal710@gmail.com")
             {
                 OK = false;
             }
