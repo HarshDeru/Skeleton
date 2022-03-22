@@ -113,5 +113,10 @@ namespace ClassLibrary
                 return false;
             }
         }
+
+        public string Valid(string orderID, string customerID, string orderDateTime, string orderDescription, string orderDispatched, object orderTotalAmount)
+        {
+            return "";
+        }
     }
 }
