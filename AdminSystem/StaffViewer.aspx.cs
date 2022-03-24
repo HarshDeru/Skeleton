@@ -25,7 +25,7 @@ public partial class _1Viewer : System.Web.UI.Page
         //displays the Staff salary
         Response.Write(AStaff.Staff_Salary+"<br>");
         //displays the Staff gender
-        Response.Write(AStaff.Staff_Gender + "<br>");
-        
+        Response.Write(AStaff.Staff_Gender.ToString() +"<br>"); 
+     
     }
 }
