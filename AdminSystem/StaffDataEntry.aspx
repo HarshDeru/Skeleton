@@ -19,6 +19,8 @@
         <asp:Label ID="lblStaffID" runat="server" Text="Staff ID" Height="19px" width="87px"></asp:Label>
 &nbsp;&nbsp;
         <asp:TextBox ID="txtStaffID" runat="server" Width="146px" height="22px"></asp:TextBox>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="btnFind" runat="server" CssClass="auto-style1" height="26px" Text="Find" width="58px" OnClick="btnFind_Click" />
         <br />
         <br />
         <asp:Label ID="lblStaffFullName" runat="server" Text="Staff Name" width="87px"></asp:Label>
@@ -43,12 +45,13 @@
         <asp:Label ID="lblStaffGender" runat="server" Text="Staff Gender" width="87px"></asp:Label>
 &nbsp;
         &nbsp;<asp:DropDownList ID="dblGender" runat="server" height="27px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" width="152px">
-            <asp:ListItem>Female</asp:ListItem>
-            <asp:ListItem>Male</asp:ListItem>
+            <asp:ListItem Value="False">Female</asp:ListItem>
+            <asp:ListItem Value="True">Male</asp:ListItem>
         </asp:DropDownList>
         <br />
         <br />
-        <asp:Label ID="lblError" runat="server" Text="[lblError]" Visible="False"></asp:Label>
+        <asp:Label ID="lblError" runat="server" Text="[lblError]" Visible="False" ForeColor="Red"></asp:Label>
+        <br />
         <br />
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" Width="58px" CssClass="auto-style1" />
 &nbsp;&nbsp;&nbsp;
