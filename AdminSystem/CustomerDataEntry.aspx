@@ -26,8 +26,8 @@
         <p>
             <asp:Label ID="lblCustomerGender" runat="server" Text="Gender" width="92px"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:DropDownList ID="ddlCustomerGender" runat="server" Height="16px" Width="140px">
-                <asp:ListItem>Female</asp:ListItem>
-                <asp:ListItem>Male</asp:ListItem>
+                <asp:ListItem Value="False">Female</asp:ListItem>
+                <asp:ListItem Value="True">Male</asp:ListItem>
             </asp:DropDownList>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -44,7 +44,8 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="txtCustomerEmail" runat="server" width="355px"></asp:TextBox>
 &nbsp;<p>
-            <asp:Label ID="lblError" runat="server" width="92px"></asp:Label>
+            <asp:Label ID="lblError" runat="server" width="383px" Visible="False">Error</asp:Label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </p>
         <asp:Button ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Ok" Width="66px" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
