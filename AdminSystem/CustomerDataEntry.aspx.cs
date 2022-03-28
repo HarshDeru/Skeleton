@@ -64,13 +64,24 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Found == true)
         {
             //display the value of the properties in the form
+            lblError.Text = "";
             txtCustomerName.Text = ACustomer.CustomerFullName;
             txtCustomerDateOfBirth.Text = ACustomer.CustomerDateOfBirth.ToString();
+            ddlCustomerGender.SelectedValue = ACustomer.CustomerGender.ToString();
             ddlCustomerGender.Text = ACustomer.CustomerGender.ToString();
             txtCustomerAddress.Text = ACustomer.CustomerAddress;
             txtCustomerNumber.Text = ACustomer.CustomerNumber.ToString();
             txtCustomerEmail.Text = ACustomer.CustomerEmail;
-
+        }
+        else
+        {
+            txtCustomerName.Text = "";
+            txtCustomerDateOfBirth.Text = "";
+            txtCustomerAddress.Text = "";
+            txtCustomerNumber.Text = "";
+            txtCustomerEmail.Text = "";
+            lblError.Text = "Error: This Id doesn't exist!";
+            lblError.Visible = true;
         }
     }
 }
