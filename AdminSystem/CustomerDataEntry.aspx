@@ -44,7 +44,7 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:TextBox ID="txtCustomerEmail" runat="server" width="355px"></asp:TextBox>
 &nbsp;<p>
-            <asp:Label ID="lblError" runat="server" width="235px"></asp:Label>
+            <asp:Label ID="lblError" runat="server" width="490px"></asp:Label>
         </p>
         <asp:Button ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Ok" Width="66px" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
