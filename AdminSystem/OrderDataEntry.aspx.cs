@@ -17,18 +17,33 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
-        //capture all attributes
-        AnOrder.OrderId = Convert.ToInt32(txtOrderID.Text);
-        AnOrder.CustomerId =Convert.ToInt32(txtCustomerID.Text);
-        AnOrder.Order_Description = txtOrderDescription.Text;
-        AnOrder.Order_DateTime = Convert.ToDateTime(txtOrderDateTime.Text);
-        AnOrder.Order_TotalAmount = Convert.ToInt32(txtOrderTotalAmount.Text);
-        AnOrder.Order_Dispatched = Convert.ToBoolean(dblOrderDispatched.SelectedIndex);
-
-        //store the address in the session object
-        Session["AnOrder"] = AnOrder;
-        //navigate to viewer page
-        Response.Redirect("OrderViewer.aspx");
+        //capture the Order DateTime
+        string OrderDateTime = txtOrderDateTime.Text;
+        //capture the Order Description
+        string OrderDescription = txtOrderDescription.Text;
+        //variable to store any error messages
+        string Error = "";
+        //validate the data
+        Error = AnOrder.Valid(OrderDateTime, OrderDescription);
+        if (Error == "")
+        {
+            //capture all attributes
+            AnOrder.OrderId = Convert.ToInt32(txtOrderID.Text);
+            AnOrder.CustomerId = Convert.ToInt32(txtCustomerID.Text);
+            AnOrder.Order_Description = txtOrderDescription.Text;
+            AnOrder.Order_DateTime = Convert.ToDateTime(txtOrderDateTime.Text);
+            AnOrder.Order_TotalAmount = Convert.ToInt32(txtOrderTotalAmount.Text);
+            AnOrder.Order_Dispatched = Convert.ToBoolean(dblOrderDispatched.SelectedIndex);
+            //store the address in the session object
+            Session["AnOrder"] = AnOrder;
+            //navigate to viewer page.
+            Response.Redirect("OrderViewer.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
     }
 
     protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
