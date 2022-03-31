@@ -36,7 +36,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.Order_Dispatched = Convert.ToBoolean(dblOrderDispatched.SelectedIndex);
             //store the address in the session object
             Session["AnOrder"] = AnOrder;
-            //navigate to viewer page
+            //navigate to viewer page.
             Response.Redirect("OrderViewer.aspx");
         }
         else
