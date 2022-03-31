@@ -114,9 +114,48 @@ namespace ClassLibrary
             }
         }
 
-        public string Valid(string orderID, string customerID, string orderDateTime, string orderDescription, string orderDispatched, object orderTotalAmount)
+        public string Valid(string OrderDateTime, string OrderDescription)
         {
-            return "";
+            //create a string variable to store the error
+            String Error = "";
+            //create a temporary variable to store date values
+            DateTime DateTemp;
+            //if the OrderDescription is blank
+            if (OrderDescription.Length == 0)
+            {
+                //record the error
+                Error = Error + "The Order Description may not be blank : ";
+            }
+
+            //if the order description is greate than 51 characters
+            if (OrderDescription.Length > 50)
+            {
+                Error = Error + "The Order Description must be less than 50 characters : ";
+            }
+
+            try
+            {
+                //copy the OrderDateTime value to the DateTemp variable
+                DateTemp = Convert.ToDateTime(OrderDateTime);
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the past : ";
+                }
+                //check to see if the date is greater than today's date
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                //record the error
+                Error = Error + "The date was not a valid date : ";
+            }
+            //return any error messages
+            return Error;
         }
     }
 }
