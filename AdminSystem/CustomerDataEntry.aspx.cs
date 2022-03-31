@@ -19,18 +19,43 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         //Create a new instance of clsCustomer
         clsCustomer ACustomer = new clsCustomer();
-        //Capture the Name
-        ACustomer.CustomerId = Convert.ToInt32(txtCustomerID.Text);
-        ACustomer.CustomerFullName = txtCustomerName.Text;
-        ACustomer.CustomerDateOfBirth = Convert.ToDateTime(txtCustomerDateOfBirth.Text);
-        ACustomer.CustomerGender = Convert.ToBoolean(ddlCustomerGender.SelectedIndex);
-        ACustomer.CustomerAddress = txtCustomerAddress.Text;
-        ACustomer.CustomerNumber = Convert.ToInt64(txtCustomerNumber.Text);
-        ACustomer.CustomerEmail = txtCustomerEmail.Text;
-        //Store the customer in the session object
-        Session["ACustomer"] = ACustomer;
-        //navigate to the viewer page
-        Response.Redirect("CustomerViewer.aspx");
+        //Capture the customer full name
+        string CustomerFullName = txtCustomerName.Text;
+        //capture the customer Date of birth
+        string CustomerDateOfBirth = txtCustomerDateOfBirth.Text;
+        //capture the customer address
+        string CustomerAddress = txtCustomerAddress.Text;
+        //capture the customer number
+        string CustomerNumber = txtCustomerNumber.Text;
+        //capture the customer email
+        string CustomerEmail = txtCustomerEmail.Text;
+        //variable to store any error message
+        string Error = "";
+        //validate the data 
+        Error = ACustomer.Valid(CustomerFullName, CustomerDateOfBirth, CustomerAddress, CustomerNumber, CustomerEmail);
+        if (Error =="")
+        {
+            //caprue the customer full name 
+            ACustomer.CustomerFullName = CustomerFullName;
+            //capture the customer date of birth
+            ACustomer.CustomerDateOfBirth = Convert.ToDateTime(CustomerDateOfBirth);
+            //Capture the customer address
+            ACustomer.CustomerAddress = CustomerAddress;
+            //capture the customer number
+            ACustomer.CustomerNumber = Convert.ToInt64(CustomerNumber);
+            //capture the customer email
+            ACustomer.CustomerEmail = CustomerEmail;
+            //Store the customer in the session object
+            Session["ACustomer"] = ACustomer;
+            //navigate to the viewer page
+            Response.Redirect("CustomerViewer.aspx");
+        }
+        else
+        {
+            //display the error message
+            lblError.Text = Error;
+        }
+        
     }
 
     protected void TextBox4_TextChanged(object sender, EventArgs e)
