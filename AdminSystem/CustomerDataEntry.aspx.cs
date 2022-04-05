@@ -35,10 +35,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = ACustomer.Valid(CustomerFullName, CustomerDateOfBirth, CustomerAddress, CustomerNumber, CustomerEmail);
         if (Error =="")
         {
+            //Capture the customer id
+            ACustomer.CustomerId = Convert.ToInt32(txtCustomerID.Text);
             //caprue the customer full name 
             ACustomer.CustomerFullName = CustomerFullName;
             //capture the customer date of birth
             ACustomer.CustomerDateOfBirth = Convert.ToDateTime(CustomerDateOfBirth);
+            //Capture the customer Gender
+            ACustomer.CustomerGender = Convert.ToBoolean(ddlCustomerGender.SelectedValue);
             //Capture the customer address
             ACustomer.CustomerAddress = CustomerAddress;
             //capture the customer number
