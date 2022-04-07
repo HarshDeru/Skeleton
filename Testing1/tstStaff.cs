@@ -523,7 +523,7 @@ namespace Test_Framework
             //invoke the method
             Error = Staff.Valid(Staff_FullName, Staff_Role, Staff_HireDate);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
 
         }
 
@@ -546,7 +546,7 @@ namespace Test_Framework
             //invoke the method
             Error = Staff.Valid(Staff_FullName, Staff_Role, Staff_HireDate);
             //test to see that the result is correct
-            Assert.AreNotEqual(Error, "");
+            Assert.AreEqual(Error, "");
         }
 
 

@@ -20,17 +20,39 @@ public partial class _1_DataEntry : System.Web.UI.Page
         clsStaff AStaff = new clsStaff();
 
         //capture the staff details when they input
-        AStaff.StaffID = Convert.ToInt32(txtStaffID.Text);
+        /*AStaff.StaffID = Convert.ToInt32(txtStaffID.Text);
         AStaff.Staff_FullName = txtStaffName.Text;
         AStaff.Staff_Role = txtStaffRole.Text;
         AStaff.Staff_HireDate = Convert.ToDateTime(txtStaffHireDate.Text);
         AStaff.Staff_Salary = Convert.ToInt32(txtStaffSalary.Text);
         AStaff.Staff_Gender = Convert.ToBoolean(dblGender.Text);
-        //store the staff in the session object
-        Session["AStaff"] = AStaff;
-        //redirects to staff viewer page.
-        Response.Redirect("StaffViewer.aspx");
+       */ //store the staff in the session object
 
+        string Staff_FullName = txtStaffName.Text;
+        string Staff_Role = txtStaffRole.Text;
+        string Staff_HireDate = txtStaffHireDate.Text;
+        string Error = "";
+
+
+
+        Error = AStaff.Valid(Staff_FullName, Staff_Role, Staff_HireDate);
+        if (Error == "")
+        {
+            //captures the staff full name
+            AStaff.Staff_FullName = Staff_FullName;
+            //captures the staff full name
+            AStaff.Staff_Role = Staff_Role;
+            //capture the staff hire date
+            AStaff.Staff_HireDate = Convert.ToDateTime(Staff_HireDate);
+            Session["AStaff"] = AStaff;
+            //redirects to staff viewer page.
+            Response.Write("StaffViewer.aspx");
+            Response.Redirect("StaffViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
     }
 
 

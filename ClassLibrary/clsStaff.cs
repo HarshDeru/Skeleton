@@ -159,10 +159,6 @@ namespace ClassLibrary
             try
             {
                 DateTemp = Convert.ToDateTime(staff_HireDate);
-                if (DateTemp < DateTime.Now.Date)
-                {
-                    Error = Error + "The date cannot be in the past : ";
-                }
                 if (DateTemp > DateTime.Now.Date)
                 {
                     Error = Error + "The date cannot be in the future : ";
