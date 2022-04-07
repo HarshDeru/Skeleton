@@ -8,7 +8,7 @@ namespace ClassLibrary
         //private data member for the product id
         private Int32 mProductID;
 
-        public int ProductID
+        public Int32 ProductID
         {
             get
             {
@@ -24,7 +24,7 @@ namespace ClassLibrary
 
         //private data member for the product price
         private double mProductPrice;
-        public double Product_Price
+        public double ProductPrice
         {
             get
             {
@@ -39,7 +39,7 @@ namespace ClassLibrary
         }
 
         private Boolean mProductAvailability;
-        public bool Product_Availablilty
+        public Boolean ProductAvailablilty
         {
             get
             {
@@ -53,7 +53,7 @@ namespace ClassLibrary
             }
         }
         private DateTime mProductShipped;
-        public DateTime Product_Shipped
+        public DateTime ProductShipped
         {
             get
             {
@@ -67,7 +67,7 @@ namespace ClassLibrary
             }
         }
         private Int32 mProductQuantity;
-        public int Product_Quantity
+        public Int32 ProductQuantity
         {
             get
             {
@@ -80,8 +80,8 @@ namespace ClassLibrary
                 mProductQuantity = value;
             }
         }
-        private String mProductName;
-        public String Product_Name
+        private string mProductName;
+        public string ProductName
         {
             get
             {
@@ -95,17 +95,33 @@ namespace ClassLibrary
             }
         }
 
-        public bool Find(int productId)
+        public bool Find(int ProductId)
         {
-            //set the private data numbers to the test data value
-            mProductID = 21;
-            mProductName = "Nike T - Shirt Size S";
-            mProductPrice = 24.99;
-            mProductQuantity = 40;
-            mProductShipped = Convert.ToDateTime("12/01/2022");
-            mProductAvailability = true;
-            //always return true
-            return true;
+            //create an instance of the data connection 
+            clsDataConnection DB = new clsDataConnection();
+            //add the parameter for the address no to search for
+            DB.AddParameter("@ProductId", ProductId);
+            //execute the atored procedure
+            DB.Execute("sproc_tblStock_FilterByProductId");
+            //if one record is found (there should bt either one or zero!)
+            if (DB.Count == 1)
+            {
+                //copy the data from the database to private data member
+                mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["ProductID"]);
+                mProductName = Convert.ToString(DB.DataTable.Rows[0]["ProductName"]);
+                mProductPrice = Convert.ToDouble(DB.DataTable.Rows[0]["ProductPrice"]);
+                mProductQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["ProductQuantity"]);
+                mProductShipped = Convert.ToDateTime(DB.DataTable.Rows[0]["ProductShipped"]);
+                mProductAvailability = Convert.ToBoolean(DB.DataTable.Rows[0]["ProductAvailability"]);
+                //return that everything worked OK
+                return true;
+            }
+            //if no record was found
+            else
+            {
+                //return false indicating a problem
+                return false;
+            }
         }
     }
 }

@@ -18,15 +18,15 @@ public partial class _1Viewer : System.Web.UI.Page
         Response.Write(anStock.ProductID + "<br>");
 
         //displays the CustomerID
-        Response.Write(anStock.Product_Name + "<br>");
+        Response.Write(anStock.ProductName + "<br>");
         //displays the Order Description
-        Response.Write(anStock.Product_Price + "<br>");
+        Response.Write(anStock.ProductPrice + "<br>");
         //displays the Order Date/Time
-        Response.Write(anStock.Product_Availablilty + "<br>");
+        Response.Write(anStock.ProductAvailablilty + "<br>");
         //displays the Order Total Amount
-        Response.Write(anStock.Product_Quantity + "<br>");
+        Response.Write(anStock.ProductQuantity + "<br>");
         //displays the Order Dispatched
-        Response.Write(anStock.Product_Shipped+ "<br>");
+        Response.Write(anStock.ProductShipped+ "<br>");
 
 
     }
