@@ -19,18 +19,13 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create an instance of clsStaff
         clsStaff AStaff = new clsStaff();
 
-        //capture the staff details when they input
-        /*AStaff.StaffID = Convert.ToInt32(txtStaffID.Text);
-        AStaff.Staff_FullName = txtStaffName.Text;
-        AStaff.Staff_Role = txtStaffRole.Text;
-        AStaff.Staff_HireDate = Convert.ToDateTime(txtStaffHireDate.Text);
-        AStaff.Staff_Salary = Convert.ToInt32(txtStaffSalary.Text);
-        AStaff.Staff_Gender = Convert.ToBoolean(dblGender.Text);
-       */ //store the staff in the session object
-
         string Staff_FullName = txtStaffName.Text;
         string Staff_Role = txtStaffRole.Text;
         string Staff_HireDate = txtStaffHireDate.Text;
+        string Staff_Salary = txtStaffSalary.Text;
+        String Staff_Gender = dblGender.SelectedValue;
+
+
         string Error = "";
 
 
@@ -44,9 +39,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AStaff.Staff_Role = Staff_Role;
             //capture the staff hire date
             AStaff.Staff_HireDate = Convert.ToDateTime(Staff_HireDate);
-            Session["AStaff"] = AStaff;
+
+            AStaff.Staff_Gender = Convert.ToBoolean(Staff_Gender);
+
+            AStaff.Staff_Salary = Convert.ToDouble(Staff_Salary);
+
+            clsStaffCollection StaffList = new clsStaffCollection();
+            StaffList.ThisStaff = AStaff;
+            StaffList.Add();
             //redirects to staff viewer page.
-            Response.Write("StaffViewer.aspx");
             Response.Redirect("StaffViewer.aspx");
         }
         else

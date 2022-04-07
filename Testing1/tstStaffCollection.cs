@@ -39,7 +39,7 @@ namespace Test_Framework
         }
 
 
-       
+
 
         [TestMethod]
         public void ThisStaffPropertyOK()
@@ -80,7 +80,32 @@ namespace Test_Framework
 
             Assert.AreEqual(AllStaff.Count, TestList.Count);
         }
+        //======================AddMethod===========================================
+        [TestMethod]
+        public void AddMehtodOK()
+        {
+            clsStaffCollection AllStaffs = new clsStaffCollection();
 
+            clsStaff TestItem = new clsStaff();
 
+            Int32 PrimaryKey = 0;
+
+            TestItem.StaffID = 1;
+            TestItem.Staff_FullName = "Shilpesh Jentilal   ";
+            TestItem.Staff_Gender = true;
+            TestItem.Staff_HireDate = Convert.ToDateTime("13/03/2020");
+            TestItem.Staff_Role = "Admin";
+            TestItem.Staff_Salary = 18000;
+
+            AllStaffs.ThisStaff = TestItem;
+
+            TestItem.StaffID = PrimaryKey;
+
+            AllStaffs.ThisStaff.Find(PrimaryKey);
+
+            Assert.AreEqual(AllStaffs.ThisStaff, TestItem);
+
+        }
     }
 }
+
