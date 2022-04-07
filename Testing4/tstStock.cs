@@ -12,9 +12,9 @@ namespace Testing4
         public void InstanceOk()
         {
             //create an instnce of the class we want to create
-            clsStock anStock = new clsStock();
+            clsStock AnStock = new clsStock();
             //test to see that it exists
-            Assert.IsNotNull(anStock);
+            Assert.IsNotNull(AnStock);
         }
 
         [TestMethod]
@@ -37,9 +37,9 @@ namespace Testing4
             //create some test data to assign to the property
             string TestData = "21b";
             //assign the data to the property
-            AnStock.Product_Name = TestData;
+            AnStock.ProductName = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.Product_Name, TestData);
+            Assert.AreEqual(AnStock.ProductName, TestData);
         }
         [TestMethod]
         public void ProductQuantityPropertyOK()
@@ -49,9 +49,9 @@ namespace Testing4
             //create some test data to assign to the property
             int TestData = 0;
             //assign the data to the property
-            AnStock.Product_Quantity = TestData;
+            AnStock.ProductQuantity = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.Product_Quantity, TestData);
+            Assert.AreEqual(AnStock.ProductQuantity, TestData);
         }
         [TestMethod]
         public void ProductShippedPropertyOK()
@@ -61,9 +61,9 @@ namespace Testing4
             //create some test data to assign to the property
             DateTime TestData = DateTime.Now.Date;
             //assign the data to the property
-            AnStock.Product_Shipped = TestData;
+            AnStock.ProductShipped = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.Product_Shipped, TestData);
+            Assert.AreEqual(AnStock.ProductShipped, TestData);
         }
 
         [TestMethod]
@@ -74,9 +74,9 @@ namespace Testing4
             //create some test data to assign to the property
             double TestData = 0.00;
             //assign the data to the property
-            AnStock.Product_Price = TestData;
+            AnStock.ProductPrice = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.Product_Price, TestData);
+            Assert.AreEqual(AnStock.ProductPrice, TestData);
         }
         [TestMethod]
         public void Product_AvailabliltyPropertyOK()
@@ -86,9 +86,9 @@ namespace Testing4
             //create some test data to assign to the property
             Boolean TestData = true;
             //assign the data to the property
-            AnStock.Product_Availablilty = TestData;
+            AnStock.ProductAvailablilty = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.Product_Availablilty, TestData);
+            Assert.AreEqual(AnStock.ProductAvailablilty, TestData);
         }
 
         [TestMethod]
@@ -100,7 +100,7 @@ namespace Testing4
             //Boolean variable to store the results of the validation
             Boolean Found = false;
             //create some test data to use with the method
-            Int32 ProductId = 21;
+            Int32 ProductId = 5;
             //invoke the method
             Found = AnStock.Find(ProductId);
             //test to see if the resuts is true
@@ -119,11 +119,11 @@ namespace Testing4
             //boolean variable to record if the data is OK
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ProductId = 21;
+            Int32 ProductId = 5;
             //invoke the method
             Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.ProductID != 21)
+            if (AnStock.ProductID != 5)
             {
                 OK = false;
             }
@@ -143,11 +143,11 @@ namespace Testing4
             //boolean variable to record if the data is OK
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ProductName = 21;
+            Int32 ProductId = 5;
             //invoke the method
-            Found = AnStock.Find(ProductName);
+            Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.Product_Name != "Nike T - Shirt Size S")
+            if (AnStock.ProductName != "The North Face Size L")
             {
                 OK = false;
             }
@@ -167,11 +167,11 @@ namespace Testing4
             //boolean variable to record if the data is OK
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ProductQuantity = 21;
+            Int32 ProductId = 5;
             //invoke the method
-            Found = AnStock.Find(ProductQuantity);
+            Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.Product_Quantity != 40)
+            if (AnStock.ProductQuantity != 30)
             {
                 OK = false;
             }
@@ -191,11 +191,11 @@ namespace Testing4
             //boolean variable to record if the data is OK
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ProductPrice = 21;
+            Int32 ProductId = 5;
             //invoke the method
-            Found = AnStock.Find(ProductPrice);
+            Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.Product_Price != 24.99)
+            if (AnStock.ProductPrice != 45.9900)
             {
                 OK = false;
             }
@@ -215,11 +215,11 @@ namespace Testing4
             //boolean variable to record if the data is OK
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ProductShipped = 21;
+            Int32 ProductId = 5;
             //invoke the method
-            Found = AnStock.Find(ProductShipped);
+            Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.Product_Shipped != Convert.ToDateTime("12/01/2022"))
+            if (AnStock.ProductShipped != Convert.ToDateTime("15/02/2022 00:00:00"))
             {
                 OK = false;
             }
@@ -239,11 +239,11 @@ namespace Testing4
             //boolean variable to record if the data is OK
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 ProductAvailability = 21;
+            Int32 ProductId = 5;
             //invoke the method
-            Found = AnStock.Find(ProductAvailability);
+            Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.Product_Availablilty != true)
+            if (AnStock.ProductAvailablilty != true)
             {
                 OK = false;
             }
