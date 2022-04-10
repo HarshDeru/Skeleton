@@ -17,10 +17,15 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
+        //captur Customer ID
+        string CustomerId = txtCustomerID.Text;
+        //capture Order Dispatechec
+        string OrderTotalAmout = txtOrderTotalAmount.Text; 
         //capture the Order DateTime
         string OrderDateTime = txtOrderDateTime.Text;
         //capture the Order Description
         string OrderDescription = txtOrderDescription.Text;
+
         //variable to store any error messages
         string Error = "";
         //validate the data
@@ -28,16 +33,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
         {
             //capture all attributes
-            AnOrder.OrderId = Convert.ToInt32(txtOrderID.Text);
-            AnOrder.CustomerId = Convert.ToInt32(txtCustomerID.Text);
-            AnOrder.Order_Description = txtOrderDescription.Text;
-            AnOrder.Order_DateTime = Convert.ToDateTime(txtOrderDateTime.Text);
-            AnOrder.Order_TotalAmount = Convert.ToInt32(txtOrderTotalAmount.Text);
+            AnOrder.CustomerId = Convert.ToInt32(CustomerId);
+            AnOrder.Order_Description = OrderDescription;
+            AnOrder.Order_DateTime = Convert.ToDateTime( OrderDateTime);
+            AnOrder.Order_TotalAmount = Convert.ToDouble(OrderTotalAmout);
             AnOrder.Order_Dispatched = Convert.ToBoolean(dblOrderDispatched.SelectedIndex);
-            //store the address in the session object
-            Session["AnOrder"] = AnOrder;
-            //navigate to viewer page.
-            Response.Redirect("OrderViewer.aspx");
+            //create a new instance of the order collection
+            clsOrderCollection OrderList = new clsOrderCollection();
+            //set the ThisOrder Property
+            OrderList.ThisOrder = AnOrder;
+            //add the new record
+            OrderList.Add();
+            //redirect back to the listpage
+            Response.Redirect("OrderList.aspx");
         }
         else
         {
