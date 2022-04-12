@@ -15,20 +15,35 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        //create a new instance of clsStock
-        clsStock anStock = new clsStock();
-        //capture the product id
-        anStock.ProductID = Convert.ToInt32(txtProductID.Text);
-        anStock.ProductName = txtProductName.Text;
-        anStock.ProductPrice = Convert.ToDouble(txtProductPrice.Text);
-        anStock.ProductQuantity = Convert.ToInt32(txtProductQuantity.Text);
-        anStock.ProductShipped = Convert.ToDateTime(txtProductShipped.Text);
-        anStock.ProductAvailablilty = Convert.ToBoolean(dblProductAvailability.SelectedIndex);
-        //store the id in the session object
-        Session["anStock"] = anStock;
-        //navigate to the viewer page
-        Response.Redirect("StockViewer.aspx");
-
+        clsStock AnStock = new clsStock();
+        string ProductID = txtProductID.Text;
+        string ProductName = txtProductName.Text;
+        string ProductPrice = txtProductPrice.Text;
+        string ProductQuantity = txtProductQuantity.Text;
+        string ProductShipped = txtProductShipped.Text;
+        string ProductAvailability = dblProductAvailability.SelectedValue;
+        string Error = "";
+        Error = AnStock.Valid(ProductName, ProductShipped);
+        if (Error == "")
+        {
+            //create a new instance of clsStock
+            clsStock anStock = new clsStock();
+            //capture the product id
+            anStock.ProductID = Convert.ToInt32(txtProductID.Text);
+            anStock.ProductName = txtProductName.Text;
+            anStock.ProductPrice = Convert.ToDouble(txtProductPrice.Text);
+            anStock.ProductQuantity = Convert.ToInt32(txtProductQuantity.Text);
+            anStock.ProductShipped = Convert.ToDateTime(txtProductShipped.Text);
+            anStock.ProductAvailablilty = Convert.ToBoolean(dblProductAvailability.SelectedValue);
+            //store the id in the session object
+            Session["anStock"] = anStock;
+            //navigate to the viewer page
+            Response.Redirect("StockViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
