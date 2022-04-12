@@ -122,6 +122,40 @@ namespace ClassLibrary
                 //return false indicating a problem
                 return false;
             }
+
+        }
+
+        public string Valid(string productName, string productShipped)
+        {
+            String Error = "";
+
+            DateTime DateTemp;
+
+            if (productName.Length == 0)
+            {
+                Error = Error + "The product name may not be blank : ";
+            }
+
+            if (productName.Length > 50)
+            {
+                Error = Error + "The product name must be less than 50 characters : ";
+            }
+
+            try
+            {
+                DateTemp = Convert.ToDateTime(productShipped);
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    Error = Error + "The data cannot be in the future : ";
+                }
+            }
+            catch
+            {
+                Error = Error + "The date was not a valid date : ";
+            }
+
+            return Error;
+
         }
     }
 }
