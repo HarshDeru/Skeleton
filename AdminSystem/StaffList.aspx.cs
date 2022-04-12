@@ -1,19 +1,21 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using ClassLibrary;
 
 
 
 public partial class _1_List : System.Web.UI.Page
 {
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack == false)
         {
+            //display the current data from the record
             DisplayStaffs();
         }
     }
@@ -24,7 +26,7 @@ public partial class _1_List : System.Web.UI.Page
 
         lstStaffList.DataSource = Staff.StaffList;
         lstStaffList.DataValueField = "StaffID";
-        lstStaffList.DataValueField = "Staff_FullName";
+        lstStaffList.DataTextField = "Staff_FullName";
         lstStaffList.DataBind();
 
     }
@@ -34,4 +36,31 @@ public partial class _1_List : System.Web.UI.Page
         Session["StaffID"] = -1;
         Response.Redirect("StaffDataEntry.aspx");
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        Int32 StaffID;
+
+        if(lstStaffList.SelectedIndex != -1)
+        {
+            StaffID = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["StaffID"] = StaffID;
+
+            Response.Redirect("StaffDataEntry.aspx");
+        }
+        else//if no records has benn select.
+        {
+            
+            lblError.Text = "Please select a record to edit from the list";
+            lblError.Visible = true;
+        }
+    }
+
+
+
+
+
+
+
+
 }

@@ -8,9 +8,37 @@ using System.Web.UI.WebControls;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+
+    Int32 StaffID;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        StaffID = Convert.ToInt32(Session["StaffID"]);
+
+        if(IsPostBack == false)
+        {
+            if (StaffID != -1)
+            {
+                DisplayStaffs();
+            }
+        }
     }
+
+    void DisplayStaffs()
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ThisStaff.Find(StaffID);
+
+        txtStaffID.Text = Staff.ThisStaff.StaffID.ToString();
+        txtStaffName.Text = Staff.ThisStaff.Staff_FullName;
+        txtStaffRole.Text = Staff.ThisStaff.Staff_Role;
+        txtStaffHireDate.Text = Staff.ThisStaff.Staff_HireDate.ToString();
+        txtStaffSalary.Text = Staff.ThisStaff.Staff_Salary.ToString();
+        dblGender.SelectedValue = Staff.ThisStaff.Staff_Gender.ToString();
+
+
+    }
+
 
 
 
@@ -18,7 +46,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create an instance of clsStaff
         clsStaff AStaff = new clsStaff();
-
+        
         string Staff_FullName = txtStaffName.Text;
         string Staff_Role = txtStaffRole.Text;
         string Staff_HireDate = txtStaffHireDate.Text;
@@ -33,6 +61,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AStaff.Valid(Staff_FullName, Staff_Role, Staff_HireDate);
         if (Error == "")
         {
+            AStaff.StaffID = StaffID;
             //captures the staff full name
             AStaff.Staff_FullName = Staff_FullName;
             //captures the staff full name
@@ -45,10 +74,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AStaff.Staff_Salary = Convert.ToDouble(Staff_Salary);
 
             clsStaffCollection StaffList = new clsStaffCollection();
-            StaffList.ThisStaff = AStaff;
-            StaffList.Add();
-            //redirects to staff viewer page.
-            Response.Redirect("StaffViewer.aspx");
+            if (StaffID == -1)
+            {
+                StaffList.ThisStaff = AStaff;
+                StaffList.Add();
+            }
+            else
+            {
+                StaffList.ThisStaff.Find(StaffID);
+                StaffList.ThisStaff = AStaff;
+
+                StaffList.Update();
+            }
+            Response.Redirect("StaffList.aspx");
         }
         else
         {
@@ -93,6 +131,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Error: This ID does not exist!";
             lblError.Visible = true;
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
     }
 }
 
