@@ -8,9 +8,37 @@ using System.Web.UI.WebControls;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+
+    Int32 StaffID;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        StaffID = Convert.ToInt32(Session["StaffID"]);
+
+        if(IsPostBack == false)
+        {
+            if (StaffID != -1)
+            {
+                DisplayStaffs();
+            }
+        }
     }
+
+    void DisplayStaffs()
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ThisStaff.Find(StaffID);
+
+        txtStaffID.Text = Staff.ThisStaff.StaffID.ToString();
+        txtStaffName.Text = Staff.ThisStaff.Staff_FullName;
+        txtStaffRole.Text = Staff.ThisStaff.Staff_Role;
+        txtStaffHireDate.Text = Staff.ThisStaff.Staff_HireDate.ToString();
+        txtStaffSalary.Text = Staff.ThisStaff.Staff_Salary.ToString();
+        dblGender.SelectedValue = Staff.ThisStaff.Staff_Gender.ToString();
+
+
+    }
+
 
 
 
@@ -18,19 +46,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create an instance of clsStaff
         clsStaff AStaff = new clsStaff();
-
-        //capture the staff details when they input
-        /*AStaff.StaffID = Convert.ToInt32(txtStaffID.Text);
-        AStaff.Staff_FullName = txtStaffName.Text;
-        AStaff.Staff_Role = txtStaffRole.Text;
-        AStaff.Staff_HireDate = Convert.ToDateTime(txtStaffHireDate.Text);
-        AStaff.Staff_Salary = Convert.ToInt32(txtStaffSalary.Text);
-        AStaff.Staff_Gender = Convert.ToBoolean(dblGender.Text);
-       */ //store the staff in the session object
-
+        
         string Staff_FullName = txtStaffName.Text;
         string Staff_Role = txtStaffRole.Text;
         string Staff_HireDate = txtStaffHireDate.Text;
+        string Staff_Salary = txtStaffSalary.Text;
+        String Staff_Gender = dblGender.SelectedValue;
+
+
         string Error = "";
 
 
@@ -38,16 +61,32 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AStaff.Valid(Staff_FullName, Staff_Role, Staff_HireDate);
         if (Error == "")
         {
+            AStaff.StaffID = StaffID;
             //captures the staff full name
             AStaff.Staff_FullName = Staff_FullName;
             //captures the staff full name
             AStaff.Staff_Role = Staff_Role;
             //capture the staff hire date
             AStaff.Staff_HireDate = Convert.ToDateTime(Staff_HireDate);
-            Session["AStaff"] = AStaff;
-            //redirects to staff viewer page.
-            Response.Write("StaffViewer.aspx");
-            Response.Redirect("StaffViewer.aspx");
+
+            AStaff.Staff_Gender = Convert.ToBoolean(Staff_Gender);
+
+            AStaff.Staff_Salary = Convert.ToDouble(Staff_Salary);
+
+            clsStaffCollection StaffList = new clsStaffCollection();
+            if (StaffID == -1)
+            {
+                StaffList.ThisStaff = AStaff;
+                StaffList.Add();
+            }
+            else
+            {
+                StaffList.ThisStaff.Find(StaffID);
+                StaffList.ThisStaff = AStaff;
+
+                StaffList.Update();
+            }
+            Response.Redirect("StaffList.aspx");
         }
         else
         {
@@ -92,6 +131,11 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Error: This ID does not exist!";
             lblError.Visible = true;
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StaffList.aspx");
     }
 }
 

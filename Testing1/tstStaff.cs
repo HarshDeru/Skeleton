@@ -224,7 +224,7 @@ namespace Test_Framework
             //invoke the methods
             Found = Staff.Find(StaffID);
             //check the staff salary
-            if (Staff.Staff_Salary != 18000.0000)
+            if (Staff.Staff_Salary != 24000.0000)
             {
                 OK = false;
 

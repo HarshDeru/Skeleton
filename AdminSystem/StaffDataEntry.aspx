@@ -55,7 +55,7 @@
         <br />
         <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click" Text="OK" Width="58px" CssClass="auto-style1" />
 &nbsp;&nbsp;&nbsp;
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="auto-style1" height="26px" width="58px" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" CssClass="auto-style1" height="26px" width="58px" OnClick="btnCancel_Click" />
     </form>
 </body>
 </html>

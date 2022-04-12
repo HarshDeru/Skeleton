@@ -7,6 +7,7 @@ namespace ClassLibrary
     public class clsStaffCollection
     {
         List<clsStaff> mStaffList = new List<clsStaff>();
+        clsStaff mThisStaff = new clsStaff();
         public List<clsStaff> StaffList
         {
             get
@@ -33,6 +34,51 @@ namespace ClassLibrary
             }
         }
 
+        
+        public clsStaff ThisStaff
+        {
+            get
+            {
+                return mThisStaff;
+            }
+            set
+            {
+                mThisStaff = value;
+            }
+        }
+
+        //============Add Method ====================================
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@Staff_FullName", mThisStaff.Staff_FullName);
+            DB.AddParameter("@Staff_Gender", mThisStaff.Staff_Gender);
+            DB.AddParameter("@Staff_Role", mThisStaff.Staff_Role);
+            DB.AddParameter("@Staff_HireDate", mThisStaff.Staff_HireDate);
+            DB.AddParameter("@Staff_Salary", mThisStaff.Staff_Salary);
+
+            return DB.Execute("sproc_tblStaff_Insert");
+        }
+
+        //============Update Method ====================================
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@StaffID", mThisStaff.StaffID);
+            DB.AddParameter("@Staff_FullName", mThisStaff.Staff_FullName);
+            DB.AddParameter("@Staff_Gender", mThisStaff.Staff_Gender);
+            DB.AddParameter("@Staff_Role", mThisStaff.Staff_Role);
+            DB.AddParameter("@Staff_HireDate", mThisStaff.Staff_HireDate);
+            DB.AddParameter("@Staff_Salary", mThisStaff.Staff_Salary);
+
+            DB.Execute("sproc_tblStaff_Update");
+
+        }
+
+
+
         public clsStaffCollection()
         {
             Int32 Index = 0;
@@ -58,10 +104,9 @@ namespace ClassLibrary
                 mStaffList.Add(Staff);
                 Index++;
             }
-            
-           
-
-
         }
+
+
+        
     }
 }

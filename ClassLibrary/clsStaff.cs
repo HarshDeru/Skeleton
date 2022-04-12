@@ -145,12 +145,12 @@ namespace ClassLibrary
             {
                 Error = Error + "The Staff Full Name must be less than 30 : ";
             }
+
             //==========================VALIDATION FOR STAFF ROLE====================================
             if (staff_Role.Length == 0)
             {
                 Error = Error + "The Staff Role may not be blank : ";
             }
-
             if(staff_Role.Length > 26)
             {
                 Error = Error + "The Staff Role must be less than 26 : ";
