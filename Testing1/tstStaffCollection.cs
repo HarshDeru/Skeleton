@@ -169,15 +169,62 @@ namespace Test_Framework
             AllStaffs.ThisStaff.Find(PrimaryKey);
             AllStaffs.Delete();
 
-           Boolean Found =  AllStaffs.ThisStaff.Find(PrimaryKey);
+            Boolean Found = AllStaffs.ThisStaff.Find(PrimaryKey);
             Assert.AreEqual(AllStaffs.ThisStaff, TestItem);
+        }
+
+        //======================ReportByFullNameMethod===========================================
+
+        [TestMethod]
+        public void ReportByFullNameMethodOK()
+        {
+            clsStaffCollection AllStaffs = new clsStaffCollection();
+            clsStaffCollection FilteredStaffs = new clsStaffCollection();
+
+            FilteredStaffs.ReportByFullName("");
+
+            Assert.AreEqual(AllStaffs.Count, FilteredStaffs.Count);
+
+        }
+
+        [TestMethod]
+        public void ReportByFullNameNoneFound()
+        {
+
+
+            clsStaffCollection FilteredStaff = new clsStaffCollection();
+            FilteredStaff.ReportByFullName("xxx xxx");
+            Assert.AreEqual(0, FilteredStaff.Count);
+        }
+
+
+        [TestMethod]
+        public void ReportByFullNameTestDataFound()
+        {
+            clsStaffCollection FilteredStaff = new clsStaffCollection();
+            Boolean OK = true;
+
+            FilteredStaff.ReportByFullName("Thresh Lantern");
+            if(FilteredStaff.Count == 2)
+            {
+                if (FilteredStaff.StaffList[0].StaffID != 10)
+                {
+                    OK = false;
+                }
+                if (FilteredStaff.StaffList[1].StaffID != 14)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
         }
 
 
     }
-
-
-
 
 }
 

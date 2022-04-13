@@ -84,19 +84,24 @@ namespace ClassLibrary
             DB.AddParameter("@StaffID", mThisStaff.StaffID);
             DB.Execute("sproc_tblStaff_Delete");
         }
-
-
-        public clsStaffCollection()
+        
+        //============RportByFullNameMethod ====================================
+        public void ReportByFullName(string Staff_FullName)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Staff_FullName",Staff_FullName);
+            DB.Execute("sproc_tblStaff_FilterByStaffFullName");
+            PopulateArray(DB);
+        }
+        void PopulateArray(clsDataConnection DB)
         {
             Int32 Index = 0;
 
-            Int32 RecordCount = 0;
-
-            clsDataConnection DB = new clsDataConnection();
-            
-            DB.Execute("sproc_tblStaff_SelectAll");
-
+            Int32 RecordCount ;
             RecordCount = DB.Count;
+            mStaffList = new List<clsStaff>();
+        
+         
 
             while (Index < RecordCount)
             {
@@ -110,10 +115,20 @@ namespace ClassLibrary
 
                 mStaffList.Add(Staff);
                 Index++;
+
+
             }
         }
 
+        public clsStaffCollection()
+        {
+            clsDataConnection DB = new clsDataConnection();
 
-        
+            DB.Execute("Sproc_tblStaff_SelectAll");
+            PopulateArray(DB);
+            
+        }
+
+
     }
 }

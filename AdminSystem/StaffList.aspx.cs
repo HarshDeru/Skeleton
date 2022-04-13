@@ -83,4 +83,28 @@ public partial class _1_List : System.Web.UI.Page
             lblError.Visible = true;
         }
     }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReportByFullName(txtFilter.Text);
+        
+
+        lstStaffList.DataSource = Staff.StaffList;
+        lstStaffList.DataValueField = "StaffID";
+        lstStaffList.DataTextField = "Staff_FullName";
+        lstStaffList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReportByFullName("");
+        txtFilter.Text="";
+
+        lstStaffList.DataSource = Staff.StaffList;
+        lstStaffList.DataValueField = "StaffID";
+        lstStaffList.DataTextField = "Staff_FullName";
+        lstStaffList.DataBind();
+    }
 }
