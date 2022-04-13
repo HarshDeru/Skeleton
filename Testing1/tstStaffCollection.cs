@@ -141,11 +141,44 @@ namespace Test_Framework
             Assert.AreEqual(AllStaffs.ThisStaff, TestItem);
 
         }
+
+        //======================DeleteMethod===========================================
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsStaffCollection AllStaffs = new clsStaffCollection();
+
+            clsStaff TestItem = new clsStaff();
+
+            Int32 PrimaryKey = 0;
+
+            TestItem.StaffID = 1;
+            TestItem.Staff_FullName = "Shilpesh Jentilal   ";
+            TestItem.Staff_Gender = true;
+            TestItem.Staff_HireDate = Convert.ToDateTime("13/03/2020");
+            TestItem.Staff_Role = "Admin";
+            TestItem.Staff_Salary = 18000;
+
+            AllStaffs.ThisStaff = TestItem;
+
+            PrimaryKey = AllStaffs.Add();
+
+            TestItem.StaffID = PrimaryKey;
+
+            AllStaffs.ThisStaff.Find(PrimaryKey);
+            AllStaffs.Delete();
+
+           Boolean Found =  AllStaffs.ThisStaff.Find(PrimaryKey);
+            Assert.AreEqual(AllStaffs.ThisStaff, TestItem);
+        }
+
+
     }
 
 
 
 
-    }
+}
 
 

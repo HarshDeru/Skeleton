@@ -76,7 +76,14 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStaff_Update");
 
         }
-
+        //============Delete Method ====================================
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            
+            DB.AddParameter("@StaffID", mThisStaff.StaffID);
+            DB.Execute("sproc_tblStaff_Delete");
+        }
 
 
         public clsStaffCollection()
@@ -86,7 +93,7 @@ namespace ClassLibrary
             Int32 RecordCount = 0;
 
             clsDataConnection DB = new clsDataConnection();
-
+            
             DB.Execute("sproc_tblStaff_SelectAll");
 
             RecordCount = DB.Count;

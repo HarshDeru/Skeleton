@@ -7,10 +7,15 @@
     <title></title>
 </head>
 <body>
-    This page is the page for staff cofirm delete.
-    testing to see if any changes are being made to the master branch
+    <p>
+        Are you sure you want to delete this record?</p>
     <form id="form1" runat="server">
-        <div>
+        <p>
+            <asp:Button ID="btnYes" runat="server" Height="27px" OnClick="btnYes_Click" Text="Yes" Width="45px" />
+&nbsp;&nbsp;
+            <asp:Button ID="btnNo" runat="server" OnClick="btnNo_Click" Text="No" width="45px" />
+        </p>
+&nbsp;<div>
         </div>
     </form>
 </body>
