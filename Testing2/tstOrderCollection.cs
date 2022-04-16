@@ -185,7 +185,61 @@ namespace Testing2
             Boolean Found = AllOrders.ThisOrder.Find(PrimaryKey);
             //test to see that the record was not found
             Assert.IsFalse(Found);
+        }
 
+        [TestMethod]
+        public void ReportByDescriptionsMethodOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a blank string (should return all record);
+            FilteredOrders.ReportByDescriptions("");
+            //test to see that the two values are the same
+            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByDescriptionsNoneFound()
+        {
+            //create an instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //apply a blank string (should return all record);
+            FilteredOrders.ReportByDescriptions("xxxxxxxxxx");
+            //test to see that the two values are the same
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByDescriptionsTestDataFound()
+        {
+            //create a instance of the filtered data
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            //var to store outcome
+            Boolean OK = true;
+            //apply a post code that doesn't exist
+            FilteredOrders.ReportByDescriptions("yyyyyyyyyy");
+            //check that the correct number of records are found
+            if (FilteredOrders.Count == 2)
+            {
+                //check that first record is ID 36
+                if (FilteredOrders.OrdersList[1].OrderId != 7)
+                {
+                    OK = false;
+                }
+                //check that the first record is ID 37
+                if (FilteredOrders.OrdersList[1].OrderId != 8)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see that there are no record
+            Assert.IsTrue(OK);
         }
     }
 }
