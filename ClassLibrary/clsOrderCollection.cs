@@ -57,33 +57,12 @@ namespace ClassLibrary
 
         public clsOrderCollection()
         {
-            //var for the index
-            Int32 Index = 0;
-            //var to store the record count
-            Int32 RecordCount = 0;
             //object for data connection
             clsDataConnection DB = new clsDataConnection();
             //execute the stored procedure
             DB.Execute("sproc_tblOrder_SelectAll");
-            //get the count of records
-            RecordCount = DB.Count;
-            //while there are records to process
-            while (Index < RecordCount)
-            {
-                //create a blank orders
-                clsOrder AnOrder = new clsOrder();
-                //read in the fields from the current record
-                AnOrder.OrderId = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-                AnOrder.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
-                AnOrder.Order_DateTime = Convert.ToDateTime(DB.DataTable.Rows[Index]["Order_DateTime"]);
-                AnOrder.Order_Description = Convert.ToString(DB.DataTable.Rows[Index]["Order_Description"]);
-                AnOrder.Order_TotalAmount = Convert.ToDouble(DB.DataTable.Rows[Index]["Order_TotalAmount"]);
-                AnOrder.Order_Dispatched = Convert.ToBoolean(DB.DataTable.Rows[Index]["Order_Dispatched"]);
-                //add the record to the private data memeber
-                mOrderList.Add(AnOrder);
-                //point at the next record
-                Index++;
-            }
+            //populate the array list with the data table
+            PopulateArray(DB);
         }
 
         public int Add()
@@ -127,5 +106,49 @@ namespace ClassLibrary
             //execute the stored procedure
             DB.Execute("sproc_tblOrder_Delete");
         }
+
+        public void ReportByDescriptions(string Descriptions)
+        {
+            //filter the records based on a full or partial descriptions
+            //connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            //send the description parameter to the database
+            DB.AddParameter("@OrderDescription", Descriptions);
+            //execute the stored procedure
+            DB.Execute("sproc_tblOrder_FilterByDescriptions");
+            //populate the array list with the data table
+            PopulateArray(DB);
+        }
+
+        public void PopulateArray(clsDataConnection DB)
+        {
+            //populate the array list based on the data tale in the paramter DB
+            //var for the index
+            Int32 Index = 0;
+            //var to store the record count
+            Int32 RecordCount;
+            //get the count of records
+            RecordCount = DB.Count;
+            //create the private array list
+            mOrderList = new List<clsOrder>();
+            //while there are records to process
+            while (Index < RecordCount)
+            {
+                //create a blank orders
+                clsOrder AnOrder = new clsOrder();
+                //read in the fields from the current record
+                AnOrder.OrderId = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                AnOrder.CustomerId = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
+                AnOrder.Order_DateTime = Convert.ToDateTime(DB.DataTable.Rows[Index]["Order_DateTime"]);
+                AnOrder.Order_Description = Convert.ToString(DB.DataTable.Rows[Index]["Order_Description"]);
+                AnOrder.Order_TotalAmount = Convert.ToDouble(DB.DataTable.Rows[Index]["Order_TotalAmount"]);
+                AnOrder.Order_Dispatched = Convert.ToBoolean(DB.DataTable.Rows[Index]["Order_Dispatched"]);
+                //add the record to the private data memeber
+                mOrderList.Add(AnOrder);
+                //point at the next record
+                Index++;
+            }
+        }
+
     }
 }
