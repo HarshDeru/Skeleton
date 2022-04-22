@@ -48,7 +48,7 @@
         </p>
         <asp:Button ID="btnOk" runat="server" OnClick="btnOk_Click" Text="Ok" Width="66px" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="btnCancel" runat="server" Text="Cancel" Width="68px" />
+        <asp:Button ID="btnCancel" runat="server" Text="Cancel" Width="68px" OnClick="btnCancel_Click" />
     </form>
 </body>
 </html>
