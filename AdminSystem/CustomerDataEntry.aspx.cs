@@ -8,12 +8,38 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
-
+    //variable to store the primary key with page levle scope
+    Int32 CustomerId;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //get the number of the customer to be processed
+        CustomerId = Convert.ToInt32(Session["CustomerId"]);
+        //if this not a new record 
+        if (IsPostBack == false)
+        {
+            if (CustomerId != -1)
+            {
+                //display the current data for the record
+                DisplayCustomers();
+            }
+        }
     }
 
+    void DisplayCustomers()
+    {
+        //create an instance of the ACustomer
+        clsCustomerCollection ACustomer = new clsCustomerCollection();
+        //find the record to update
+        ACustomer.ThisCustomer.Find(CustomerId);
+        //display the data for this record
+        txtCustomerID.Text = ACustomer.ThisCustomer.CustomerId.ToString();
+        txtCustomerName.Text = ACustomer.ThisCustomer.CustomerFullName;
+        txtCustomerDateOfBirth.Text = ACustomer.ThisCustomer.CustomerDateOfBirth.ToString();
+        ddlCustomerGender.Text = ACustomer.ThisCustomer.CustomerGender.ToString();
+        txtCustomerAddress.Text = ACustomer.ThisCustomer.CustomerAddress;
+        txtCustomerNumber.Text = ACustomer.ThisCustomer.CustomerNumber.ToString();
+        txtCustomerEmail.Text = ACustomer.ThisCustomer.CustomerEmail;
+    }
     protected void btnOk_Click(object sender, EventArgs e)
     {
 
@@ -36,7 +62,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error =="")
         {
             //Capture the customer id
-            ACustomer.CustomerId = Convert.ToInt32(txtCustomerID.Text);
+            ACustomer.CustomerId = CustomerId;
             //caprue the customer full name 
             ACustomer.CustomerFullName = CustomerFullName;
             //capture the customer date of birth
@@ -49,10 +75,30 @@ public partial class _1_DataEntry : System.Web.UI.Page
             ACustomer.CustomerNumber = Convert.ToInt64(CustomerNumber);
             //capture the customer email
             ACustomer.CustomerEmail = CustomerEmail;
-            //Store the customer in the session object
-            Session["ACustomer"] = ACustomer;
-            //navigate to the viewer page
-            Response.Redirect("CustomerViewer.aspx");
+
+            //Create a new instance of the Customer Collection
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+
+            //if this is a new record i.e CustomerId = -1 then add the data
+            if (CustomerId == -1)
+            {
+                //set the thisCustomer property
+                CustomerList.ThisCustomer = ACustomer;
+                //Add the new record
+                CustomerList.Add();
+            }
+            //otherwise it must be update
+            else
+            {
+                //find the record to update
+                CustomerList.ThisCustomer.Find(CustomerId);
+                //set the ThisCustomer property
+                CustomerList.ThisCustomer = ACustomer;
+                //update the record
+                CustomerList.Update();
+            }
+            //navigate to the List page
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {
@@ -112,5 +158,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             lblError.Text = "Error: This Id doesn't exist!";
             lblError.Visible = true;
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("CustomerList.aspx");
     }
 }
