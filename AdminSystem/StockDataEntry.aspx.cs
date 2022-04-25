@@ -34,7 +34,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             anStock.ProductPrice = Convert.ToDouble(txtProductPrice.Text);
             anStock.ProductQuantity = Convert.ToInt32(txtProductQuantity.Text);
             anStock.ProductShipped = Convert.ToDateTime(txtProductShipped.Text);
-            anStock.ProductAvailablilty = Convert.ToBoolean(dblProductAvailability.SelectedValue);
+            anStock.ProductAvailability = Convert.ToBoolean(dblProductAvailability.SelectedValue);
             //store the id in the session object
             Session["anStock"] = anStock;
             //navigate to the viewer page
@@ -66,7 +66,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtProductPrice.Text = AnStock.ProductPrice.ToString();
             txtProductQuantity.Text = AnStock.ProductQuantity.ToString();
             txtProductShipped.Text = AnStock.ProductShipped.ToString();
-            dblProductAvailability.SelectedValue = AnStock.ProductAvailablilty.ToString();
+            dblProductAvailability.SelectedValue = AnStock.ProductAvailability.ToString();
 
 
         }
