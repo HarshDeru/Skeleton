@@ -84,16 +84,16 @@ namespace Testing4
             Assert.AreEqual(AnStock.ProductPrice, TestData);
         }
         [TestMethod]
-        public void Product_AvailabliltyPropertyOK()
+        public void Product_AvailabilityPropertyOK()
         {
             //create an instance of the class we want to create
             clsStock AnStock = new clsStock();
             //create some test data to assign to the property
             Boolean TestData = true;
             //assign the data to the property
-            AnStock.ProductAvailablilty = TestData;
+            AnStock.ProductAvailability = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.ProductAvailablilty, TestData);
+            Assert.AreEqual(AnStock.ProductAvailability, TestData);
         }
 
         [TestMethod]
@@ -248,7 +248,7 @@ namespace Testing4
             //invoke the method
             Found = AnStock.Find(ProductId);
             //check the product id
-            if (AnStock.ProductAvailablilty != true)
+            if (AnStock.ProductAvailability != true)
             {
                 OK = false;
             }

@@ -22,7 +22,7 @@ public partial class _1Viewer : System.Web.UI.Page
         //displays the Order Description
         Response.Write(anStock.ProductPrice + "<br>");
         //displays the Order Date/Time
-        Response.Write(anStock.ProductAvailablilty + "<br>");
+        Response.Write(anStock.ProductAvailability + "<br>");
         //displays the Order Total Amount
         Response.Write(anStock.ProductQuantity + "<br>");
         //displays the Order Dispatched

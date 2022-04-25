@@ -39,7 +39,7 @@ namespace ClassLibrary
         }
 
         private Boolean mProductAvailability;
-        public Boolean ProductAvailablilty
+        public Boolean ProductAvailability
         {
             get
             {
