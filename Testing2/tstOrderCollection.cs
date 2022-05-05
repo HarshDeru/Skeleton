@@ -214,32 +214,21 @@ namespace Testing2
         [TestMethod]
         public void ReportByDescriptionsTestDataFound()
         {
-            //create a instance of the filtered data
-            clsOrderCollection FilteredOrders = new clsOrderCollection();
-            //var to store outcome
+            clsOrderCollection FilterOrder = new clsOrderCollection();
             Boolean OK = true;
-            //apply a post code that doesn't exist
-            FilteredOrders.ReportByDescriptions("yyyyyyyyyy");
-            //check that the correct number of records are found
-            if (FilteredOrders.Count == 2)
+            FilterOrder.ReportByDescriptions("yyyyyyyyyyyyyyy");
+            if (FilterOrder.Count == 2)
             {
-                //check that first record is ID 36
-                if (FilteredOrders.OrdersList[1].OrderId != 7)
+                if (FilterOrder.OrdersList[0].OrderId != 1)
                 {
                     OK = false;
                 }
-                //check that the first record is ID 37
-                if (FilteredOrders.OrdersList[1].OrderId != 8)
+                if (FilterOrder.OrdersList[1].OrderId != 2)
                 {
                     OK = false;
                 }
+                Assert.IsTrue(OK);
             }
-            else
-            {
-                OK = false;
-            }
-            //test to see that there are no record
-            Assert.IsTrue(OK);
         }
     }
 }
